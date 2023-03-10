@@ -8,7 +8,7 @@
 '''
 # imports
 
-import os, time
+import os, random
 
 
 # cards
@@ -55,40 +55,49 @@ def rules():
 
 def card():
   global lives
-  while True:
-    os.system('clear')
-    print("+----------------------------+")
-    print("|           Card _           |")
-    print("|                            |")
-    print("|                            |")
-    print("|                            |")
-    print("|                            |")
-    print("|                            |")
-    print("|                            |")
-    print("|                            |")
-    print("|                            |")
-    print("|                            |")
-    print("|  Type an acceptable answer |")
-    print("|             Or             |")
-    print("|  Press ENTER To Skip Card  |")
-    print("+----------------------------+")
-    card = input('')
-    if card == "":
-      lives -=1
+  var1 = random.randint(10,99)
+  operation_int = random.randint(0,3)
+  if operation_int == 0 : operation = "+"
+  elif operation_int == 1 : operation = "-"
+  elif operation_int == 2 : operation = "*"
+  elif operation_int == 3 : operation = "/"
+  var2 = random.randint(10,99)
+  os.system('clear')
+  print("+----------------------------+")
+  print("| Card #",cardnum)
+  print("| Lives =",lives,"                 |")
+  print("|                            |")
+  print("|       >> Question <<       |")
+  print("|                            |")
+  print("|         >",var1,operation,var2,"         |")
+  print("|                            |")
+  print("|                            |")
+  print("|                            |")
+  print("|                            |")
+  print("|  Type an acceptable answer |")
+  print("|             Or             |")
+  print("|  Press ENTER To Skip Card  |")
+  print("+----------------------------+")
+  card = input('')
+  if card == "":
+    lives -=1
+    
 
     
-endcard = ""
+def endcard():
+  print("end")
 
 # variables
 
 points = 0
 lives = 5
 cards = 0
+cardnum = 1
 
 # code testing
 
 startcard()
 rules()
-card()
+while lives >=1: card()
 
-print("\nend")
+endcard()
