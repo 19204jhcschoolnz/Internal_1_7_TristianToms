@@ -8,7 +8,15 @@
 '''
 # imports
 
-import os, random
+import time, os, random
+
+# variables
+
+points = 0
+lives = 5
+cards = 0
+cardnum = 0
+playagain = "n"
 
 
 # cards
@@ -54,7 +62,8 @@ def rules():
 
 
 def card():
-  global lives
+  global lives,points,cardnum
+  cardnum += 1
   var1 = random.randint(10,99)
   operation_int = random.randint(0,3)
   if operation_int == 0 : operation = "+"
@@ -78,26 +87,75 @@ def card():
   print("|             Or             |")
   print("|  Press ENTER To Skip Card  |")
   print("+----------------------------+")
-  card = input('')
+  try:
+    card = float(input(''))
+  except ValueError:
+    card = ""
+  
   if card == "":
     lives -=1
     
-
+  elif operation_int == 0:
+    if card == (var1 + var2):
+      print("+1 point")
+      points += 1
+    else: lives -= 1
     
+  elif operation_int == 1:
+    if card == (var1 - var2):
+      print("+1 point")
+      points += 1
+    else: lives -= 1
+    
+  elif operation_int == 2:
+    if card == (var1 * var2):
+      print("+1 point")
+      points += 1
+    else: lives -= 1
+    
+  elif operation_int == 3:
+    if card == (var1 / var2):
+      print("+1 point")
+      points += 1
+    else: lives -= 1
+
+  time.sleep(2)
+
+
 def endcard():
-  print("end")
+  global points, cardnum,playagain
+  os.system('clear')
+  print("+----------------------------+")
+  print("|   ____  ____  ____  ____   |")
+  print("|  |    ||    || [] ||  __|  |")
+  print("|  | [] || [] || ___||__  |  |")
+  print("|  |____||____||_|   |____|  |")
+  print("| It seems you have run out  |")
+  print("| of lives, dont worry, you  |")
+  print("| made it to card #",cardnum)
+  print("| and earned:",points)
+  print("| before your lives ran out. |")
+  print("|                            |")
+  print("| Do you want to play again  |")
+  print("| and try to beat your high  |")
+  print("| score? (yes (y) / no (n) ) |")
+  print("+----------------------------+")
+  playagain = input('')
+  if playagain == "yes" or playagain == "y":
+    game()
+  elif playagain == "no" or playagain == "n":
+    print("Thank you for playing")
+    exit
 
-# variables
 
-points = 0
-lives = 5
-cards = 0
-cardnum = 1
+def game():
+  global lives
+  while lives >=1: card()
+  endcard()
+
 
 # code testing
 
 startcard()
 rules()
-while lives >=1: card()
-
-endcard()
+game()
