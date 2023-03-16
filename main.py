@@ -93,7 +93,10 @@ def card():
     card = ""
   
   if card == "":
-    print("Incorrect answer or card skipped")
+    if operation_int == 0: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 + var2,"\u001b[0m")
+    elif operation_int == 1: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 - var2,"\u001b[0m")
+    elif operation_int == 2: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 * var2,"\u001b[0m")
+    elif operation_int == 3: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
     lives -=1
     time.sleep(1)
     
