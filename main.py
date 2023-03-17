@@ -12,10 +12,7 @@ import time, os, random # imports required librabries; time for refresh delay, o
 
 # variables
 
-points = 0 # amount of cards answered correctly
-lives = 5 # amount of cards allowed to be answered incorrectly or skipped before the game ends
-cardnum = 0 # starting card number
-playagain = "" # playagain placeholder variable
+[points,lives,cardnum,playagain]=[0,5,0,""] # points = amount of cards answered correctly,lives = amount of times the player can skip an answer or answer incorrectly before the game ends, cardnum = amount of cards answered, playagain = play again placeholder
 
 
 # cards
@@ -65,13 +62,11 @@ def rules():
 def card():
   global lives,points,cardnum
   cardnum += 1 # increases card number by one
-  var1 = random.randint(10,99)               #
-  operation_int = random.randint(0,3)
-  if operation_int == 0 : operation = "+"
+  [var1,var2,operation_int] = [random.randint(10,99),random.randint(10,99),random.randint(0,3)] # } card random question generation
+  if operation_int == 0 : operation = "+"   #
   elif operation_int == 1 : operation = "-"
   elif operation_int == 2 : operation = "*"
-  elif operation_int == 3 : operation = "/"
-  var2 = random.randint(10,99)               # } card random question generation
+  elif operation_int == 3 : operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
   os.system('clear')
   print("+----------------------------+")
   print("| \u001b[36mCard #",cardnum,"\u001b[0m")
@@ -89,6 +84,7 @@ def card():
   print("| \u001b[34m Press ENTER To Skip Card \u001b[0m |")
   print("+----------------------------+")
   # draws card with custom random variables generated
+  
   try:                      #
     card = float(input(''))
   except ValueError:
@@ -165,17 +161,15 @@ def endcard():
   print("| \u001b[34mscore? (yes (y) / no (n) )\u001b[0m |")
   print("+----------------------------+")
   playagain = input('')
-  if playagain == "yes" or playagain == "y":
+  if playagain == "yes" or playagain == "y": # begins to prepare the code to play another game
     print("\u001b[35mSetting up a new game\u001b[0m")
-    points = 0
-    lives = 5
-    cardnum = 0
+    [points,cardnum,playagain]=[0,0,""] # resets variables to starting values so the game can restart correctly
     time.sleep(1)
     game()
-  elif playagain == "no" or playagain == "n":
-    print("\u001b[35mThank you for playing\u001b[0m")
+  elif playagain == "no" or playagain == "n": # displays a "thank you for playing" mesage before exiting the code
+    print("\n\u001b[35mThank you for playing\u001b[0m")
     exit
-  else:
+  else: # retries in the case of an unexpected input
     print ("\u001b[33mUnexpected answer, please try again\u001b[0m")
     time.sleep(1)
     endcard()
@@ -190,6 +184,6 @@ def game():
 
 # game initiation order
 
-startcard()
-rules()
-game()
+startcard() # displays starting title card
+rules() # displays rules card
+game() # initiates functional game code
