@@ -8,15 +8,14 @@
 '''
 # imports
 
-import time, os, random
+import time, os, random # imports required librabries; time for refresh delay, os for screen clearing and random for question generation
 
 # variables
 
-points = 0
-lives = 5
-cards = 0
-cardnum = 0
-playagain = "n"
+points = 0 # amount of cards answered correctly
+lives = 5 # amount of cards allowed to be answered incorrectly or skipped before the game ends
+cardnum = 0 # starting card number
+playagain = "" # playagain placeholder variable
 
 
 # cards
@@ -39,6 +38,7 @@ def startcard():
   print("|                            |")
   print("+----------------------------+")
   input('')
+  # start / title card to serve as a buffer for when the game starts
 
 
 def rules():
@@ -59,18 +59,19 @@ def rules():
   print("| \u001b[34m>Press ENTER To Continue.<\u001b[0m |")
   print("+----------------------------+")
   input('')
+  # rule card that explains what the rules are and how the game works
 
 
 def card():
   global lives,points,cardnum
-  cardnum += 1
-  var1 = random.randint(10,99)
+  cardnum += 1 # increases card number by one
+  var1 = random.randint(10,99)               #
   operation_int = random.randint(0,3)
   if operation_int == 0 : operation = "+"
   elif operation_int == 1 : operation = "-"
   elif operation_int == 2 : operation = "*"
   elif operation_int == 3 : operation = "/"
-  var2 = random.randint(10,99)
+  var2 = random.randint(10,99)               # } card random question generation
   os.system('clear')
   print("+----------------------------+")
   print("| \u001b[36mCard #",cardnum,"\u001b[0m")
@@ -87,10 +88,11 @@ def card():
   print("| \u001b[34m            Or            \u001b[0m |")
   print("| \u001b[34m Press ENTER To Skip Card \u001b[0m |")
   print("+----------------------------+")
-  try:
+  # draws card with custom random variables generated
+  try:                      #
     card = float(input(''))
   except ValueError:
-    card = ""
+    card = ""               # } error handling
   
   if card == "":
     if operation_int == 0: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 + var2,"\u001b[0m")
@@ -99,6 +101,7 @@ def card():
     elif operation_int == 3: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
     lives -=1
     time.sleep(1)
+    # checks if card was skipped or a non interger answer was submitted
     
   elif operation_int == 0:
     if card == (var1 + var2):
@@ -140,11 +143,11 @@ def card():
       lives -=1
       time.sleep(1)
 
-
+  # checking for correct answers for the four variations of operations and displays if the player gets the answer wrong and what the correct answer was
 
 
 def endcard():
-  global points, cards, lives, cardnum, playagain
+  global points, lives, cardnum, playagain
   os.system('clear')
   print("+----------------------------+")
   print("| \u001b[36m  ____  ____  ____  ____  \u001b[0m |")
@@ -166,7 +169,6 @@ def endcard():
     print("\u001b[35mSetting up a new game\u001b[0m")
     points = 0
     lives = 5
-    cards = 0
     cardnum = 0
     time.sleep(1)
     game()
@@ -177,15 +179,16 @@ def endcard():
     print ("\u001b[33mUnexpected answer, please try again\u001b[0m")
     time.sleep(1)
     endcard()
-
+  # end card displays what the users end score was, how many cards they answered and asks them if they would like to play again
 
 def game():
   global lives
   while lives >=1: card()
   endcard()
+  # game end testing
 
 
-# code testing
+# game initiation order
 
 startcard()
 rules()
