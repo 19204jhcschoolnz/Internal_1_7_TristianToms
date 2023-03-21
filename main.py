@@ -12,11 +12,12 @@ import time, os, random # imports required librabries; time for refresh delay, o
 
 # variables
 
-[points,lives,cardnum,playagain]=[0,5,0,""] # points = amount of cards answered correctly,lives = amount of times the player can skip an answer or answer incorrectly before the game ends, cardnum = amount of cards answered, playagain = play again placeholder
+[points,lives,cardnum,playagain,mode]=[0,5,0,"",""] # points = amount of cards answered correctly,lives = amount of times the player can skip an answer or answer incorrectly before the game ends, cardnum = amount of cards answered, playagain = play again placeholder and mode is the game difficulty
 
 # cards
 
 def startcard(): # start / title card to serve as a buffer for when the game starts
+  global mode
   os.system('clear')
   print("""+----------------------------+
 |                            |
@@ -28,12 +29,12 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
 |                            |
 | \u001b[35m         QUIZ GAME        \u001b[0m |
 |                            |
-|                            |
-| \u001b[34m        Press ENTER       \u001b[0m |
-| \u001b[34m         To Begin         \u001b[0m |
-|                            |
+| \u001b[34m Please Input A Game Mode \u001b[0m |
+| \u001b[32m          'easy'          \u001b[0m |
+| \u001b[33m         'medium'         \u001b[0m |
+| \u001b[31m          'hard'          \u001b[0m |
 +----------------------------+""")
-  input('')
+  mode = input('')
 
 
 def rules(): # rule card that explains what the rules are and how the game works
@@ -57,13 +58,23 @@ def rules(): # rule card that explains what the rules are and how the game works
 
 
 def card(): # draws card with custom random variables generated
-  global lives,points,cardnum
+  global lives,points,cardnum,mode
   cardnum += 1 # increases card number by one
-  [var1,var2,operation_int] = [random.randint(10,99),random.randint(10,99),random.randint(0,3)] # } card random question generation
-  if operation_int == 0 : operation = "+"   #
-  elif operation_int == 1 : operation = "-"
-  elif operation_int == 2 : operation = "*"
-  elif operation_int == 3 : operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
+  if mode == "easy": [var1,var2,operation_int] = [random.randint(0,10),random.randint(0,10),random.randint(0,3)]
+  else: [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)] # } card random question generation
+  if operation_int == 0 :                           #
+    if var1 <= 9 or var2 <=9 : operation = " +"
+    if var1 <= 9 and var2 <= 9: operation = " + "
+  elif operation_int == 1 :
+    if var1 <= 9 or var2 <=9 : operation = " -"
+    if var1 <= 9 and var2 <= 9: operation = " - "
+  elif operation_int == 2 :
+    if var1 <= 9 or var2 <=9 : operation = " *"
+    if var1 <= 9 and var2 <= 9: operation = " * "
+  elif operation_int == 3 :
+    if var1 <= 9 or var2 <=9 : operation = " /"
+    if var1 <= 9 and var2 <= 9: operation = " / " # } operation decyphering for addition, subtraction, multiplication and division
+
   os.system('clear')
   print("""+----------------------------+
 | \u001b[36mCard #""",cardnum,"""\u001b[0m
