@@ -14,24 +14,49 @@ import time, os, random # imports required librabries; time for refresh delay, o
 
 [points,lives,cardnum,playagain]=[0,5,0,""] # points = amount of cards answered correctly,lives = amount of times the player can skip an answer or answer incorrectly before the game ends, cardnum = amount of cards answered, playagain = play again placeholder
 
-
 # cards
 
-def startcard():
+def startcard(): # start / title card to serve as a buffer for when the game starts
   os.system('clear')
-  print("+----------------------------+\n|                            |\n| \u001b[36m  _  _  ____  ____  _  _  \u001b[0m |\n| \u001b[36m | \/ || [] ||_  _|| L| | \u001b[0m |\n| \u001b[36m | \/ || __ | |  | | __ | \u001b[0m |\n| \u001b[36m |_||_||_||_| |__| |_||_| \u001b[0m |\n| \u001b[36m      >> INFINITUM <<     \u001b[0m |\n|                            |\n| \u001b[35m         QUIZ GAME        \u001b[0m |\n|                            |\n|                            |\n| \u001b[34m        Press ENTER       \u001b[0m |\n| \u001b[34m         To Begin         \u001b[0m |\n|                            |\n+----------------------------+")
+  print("""+----------------------------+
+|                            |
+| \u001b[36m  _  _  ____  ____  _  _  \u001b[0m |
+| \u001b[36m | \/ || [] ||_  _|| L| | \u001b[0m |
+| \u001b[36m | \/ || __ | |  | | __ | \u001b[0m |
+| \u001b[36m |_||_||_||_| |__| |_||_| \u001b[0m |
+| \u001b[36m      >> INFINITUM <<     \u001b[0m |
+|                            |
+| \u001b[35m         QUIZ GAME        \u001b[0m |
+|                            |
+|                            |
+| \u001b[34m        Press ENTER       \u001b[0m |
+| \u001b[34m         To Begin         \u001b[0m |
+|                            |
++----------------------------+""")
   input('')
-  # start / title card to serve as a buffer for when the game starts
 
 
-def rules():
+def rules(): # rule card that explains what the rules are and how the game works
   os.system('clear')
-  print("+----------------------------+\n| \u001b[36m          Rules:          \u001b[0m |\n| \u001b[36mCards will appear one after\u001b[0m|\n| \u001b[36manother, you have to answer\u001b[0m|\n| \u001b[36meach card to the best of  \u001b[0m |\n| \u001b[36mabilities, for every card \u001b[0m |\n| \u001b[36myou answer correctly you  \u001b[0m |\n| \u001b[36mearn 1 point. After",lives,"    \u001b[0m |\n| \u001b[36mfalsely answered cards The\u001b[0m |\n| \u001b[36mQuiz will end. At the end \u001b[0m |\n| \u001b[36mend of the quiz your total\u001b[0m |\n| \u001b[36mamount of points will be  \u001b[0m |\n| \u001b[36mdisplayed for you to see. \u001b[0m |\n| \u001b[34m>Press ENTER To Continue.<\u001b[0m |\n+----------------------------+")
+  print("""+----------------------------+
+| \u001b[36m          Rules:          \u001b[0m |
+| \u001b[36mCards will appear one after\u001b[0m|
+| \u001b[36manother, you have to answer\u001b[0m|
+| \u001b[36meach card to the best of  \u001b[0m |
+| \u001b[36mabilities, for every card \u001b[0m |
+| \u001b[36myou answer correctly you  \u001b[0m |
+| \u001b[36mearn 1 point. After""",lives,"""    \u001b[0m |
+| \u001b[36mfalsely answered cards The\u001b[0m |
+| \u001b[36mQuiz will end. At the end \u001b[0m |
+| \u001b[36mend of the quiz your total\u001b[0m |
+| \u001b[36mamount of points will be  \u001b[0m |
+| \u001b[36mdisplayed for you to see. \u001b[0m |
+| \u001b[34m>Press ENTER To Continue.<\u001b[0m |
++----------------------------+""")
   input('')
-  # rule card that explains what the rules are and how the game works
 
 
-def card():
+def card(): # draws card with custom random variables generated
   global lives,points,cardnum
   cardnum += 1 # increases card number by one
   [var1,var2,operation_int] = [random.randint(10,99),random.randint(10,99),random.randint(0,3)] # } card random question generation
@@ -40,8 +65,22 @@ def card():
   elif operation_int == 2 : operation = "*"
   elif operation_int == 3 : operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
   os.system('clear')
-  print("+----------------------------+\n| \u001b[36mCard #",cardnum,"\u001b[0m\n| \u001b[36mLives =",lives,"                \u001b[0m |\n|                            |\n| \u001b[35m      >> Question <<      \u001b[0m |\n|                            |\n| \u001b[35m        >",var1,operation,var2,"        \u001b[0m |\n|                            |\n|                            |\n|                            |\n|                            |\n| \u001b[34m Type an acceptable answer\u001b[0m |\n| \u001b[34m            Or            \u001b[0m |\n| \u001b[34m Press ENTER To Skip Card \u001b[0m |\n+----------------------------+")
-  # draws card with custom random variables generated
+  print("""+----------------------------+
+| \u001b[36mCard #""",cardnum,"""\u001b[0m
+| \u001b[36mLives =""",lives,"""                \u001b[0m |
+|                            |
+| \u001b[35m      >> Question <<      \u001b[0m |
+|                            |
+| \u001b[35m        >""",var1,operation,var2,"""        \u001b[0m |
+|                            |
+|                            |
+|                            |
+|                            |
+| \u001b[34m Type an acceptable answer\u001b[0m |
+| \u001b[34m            Or            \u001b[0m |
+| \u001b[34m Press ENTER To Skip Card \u001b[0m |
++----------------------------+""")
+ 
   
   try:                      #
     card = float(input(''))
@@ -100,10 +139,24 @@ def card():
   # checking for correct answers for the four variations of operations (add, subtract, multiply and divide) and displays if the player gets the answer wrong and what the correct answer was
 
 
-def endcard():
+def endcard(): # end card displays what the users end score was, how many cards they answered and asks them if they would like to play again
   global points, lives, cardnum, playagain
   os.system('clear')
-  print("+----------------------------+\n| \u001b[33m  ____  ____  ____  ____  \u001b[0m |\n| \u001b[33m |    ||    || [] ||  __| \u001b[0m |\n| \u001b[33m | [] || [] || ___||__  | \u001b[0m |\n| \u001b[33m |____||____||_|   |____| \u001b[0m |\n| \u001b[36mIt seems you have run out \u001b[0m |\n| \u001b[36mof lives, dont worry, you \u001b[0m |\n| \u001b[36mmade it to card #",cardnum,"\u001b[0m\n| \u001b[36mand earned:",points,"point(s)\u001b[0m\n| \u001b[36mbefore your lives ran out.\u001b[0m |\n|                            |\n| \u001b[34mDo you want to play again \u001b[0m |\n| \u001b[34mand try to beat your high \u001b[0m |\n| \u001b[34mscore? (yes (y) / no (n) )\u001b[0m |\n+----------------------------+")
+  print("""+----------------------------+
+| \u001b[33m  ____  ____  ____  ____  \u001b[0m |
+| \u001b[33m |    ||    || [] ||  __| \u001b[0m |
+| \u001b[33m | [] || [] || ___||__  | \u001b[0m |
+| \u001b[33m |____||____||_|   |____| \u001b[0m |
+| \u001b[36mIt seems you have run out \u001b[0m |
+| \u001b[36mof lives, dont worry, you \u001b[0m |
+| \u001b[36mmade it to card #""",cardnum,"""\u001b[0m
+| \u001b[36mand earned:""",points,"""point(s)\u001b[0m
+| \u001b[36mbefore your lives ran out.\u001b[0m |
+|                            |
+| \u001b[34mDo you want to play again \u001b[0m |
+| \u001b[34mand try to beat your high \u001b[0m |
+| \u001b[34mscore? (yes (y) / no (n) )\u001b[0m |
++----------------------------+""")
   playagain = input('')
   if playagain == "yes" or playagain == "y": # begins to prepare the code to play another game
     print("\u001b[35mSetting up a new game\u001b[0m")
@@ -117,14 +170,13 @@ def endcard():
     print ("\u001b[33mUnexpected answer, please try again\u001b[0m")
     time.sleep(1)
     endcard()
-  # end card displays what the users end score was, how many cards they answered and asks them if they would like to play again
 
-def game():
+
+def game(): # tests if the player has ran out of lives and halts the current game before displaying the end card
   global lives
   while lives >=1: card()
   endcard()
-  # game end testing
-
+  
 
 # game initiation order
 
