@@ -92,6 +92,8 @@ def card(): # draws card with custom random variables generated
     if var1 <= 9 or var2 <=9 : operation = " /"
     if var1 <= 9 and var2 <= 9: operation = " / "
     if var1 >= 10 and var2 >= 10: operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
+    if var1 == 0: var1 = 1    #
+    elif var2 == 0 : var2 = 1 # ZeroDivisionError prevention
 
   os.system('clear')
   print("""+----------------------------+
@@ -191,6 +193,7 @@ def endcard(): # end card displays what the users end score was, how many cards 
     print("\u001b[35mSetting up a new game\u001b[0m")
     [points,lives,cardnum,playagain]=[0,5,0,""] # resets variables to starting values so the game can restart correctly
     time.sleep(1)
+    startcard()
     game()
   elif playagain == "no" or playagain == "n": # displays a "thank you for playing" mesage before exiting the code
     print("\n\u001b[35mThank you for playing\u001b[0m")
