@@ -35,6 +35,19 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
 | \u001b[31m          'hard'          \u001b[0m |
 +----------------------------+""")
   mode = input('')
+  if mode == "easy":                                                             #
+    print("\u001b[35mGamemode \u001b[32m'easy'\u001b[35m selected\u001b[0m")
+    time.sleep(1)
+  elif mode == "medium":
+    print("\u001b[35mGamemode \u001b[33m'medium'\u001b[35m selected\u001b[0m")
+    time.sleep(1)
+  elif mode == "hard":
+    print("\u001b[35mGamemode \u001b[31m'hard'\u001b[35m selected\u001b[0m")
+    time.sleep(1)
+  else: 
+    print("\u001b[33mInvalid game mode name selected please try again\u001b[0m")
+    time.sleep(1)
+    startcard()                                                                  # game mode selection
 
 
 def rules(): # rule card that explains what the rules are and how the game works
@@ -60,20 +73,25 @@ def rules(): # rule card that explains what the rules are and how the game works
 def card(): # draws card with custom random variables generated
   global lives,points,cardnum,mode
   cardnum += 1 # increases card number by one
-  if mode == "easy": [var1,var2,operation_int] = [random.randint(0,10),random.randint(0,10),random.randint(0,3)]
-  else: [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)] # } card random question generation
-  if operation_int == 0 :                           #
+  if mode == "easy": [var1,var2,operation_int] = [random.randint(0,10),random.randint(0,10),random.randint(0,3)]     #
+  elif mode == "medium": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,10),random.randint(0,3)]
+  elif mode == "hard": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)]   # } card random question generation
+  if operation_int == 0 :                         #
     if var1 <= 9 or var2 <=9 : operation = " +"
     if var1 <= 9 and var2 <= 9: operation = " + "
+    if var1 >= 10 and var2 >= 10: operation = "+"
   elif operation_int == 1 :
     if var1 <= 9 or var2 <=9 : operation = " -"
     if var1 <= 9 and var2 <= 9: operation = " - "
+    if var1 >= 10 and var2 >= 10: operation = "-"
   elif operation_int == 2 :
     if var1 <= 9 or var2 <=9 : operation = " *"
     if var1 <= 9 and var2 <= 9: operation = " * "
+    if var1 >= 10 and var2 >= 10: operation = "*"
   elif operation_int == 3 :
     if var1 <= 9 or var2 <=9 : operation = " /"
-    if var1 <= 9 and var2 <= 9: operation = " / " # } operation decyphering for addition, subtraction, multiplication and division
+    if var1 <= 9 and var2 <= 9: operation = " / "
+    if var1 >= 10 and var2 >= 10: operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
 
   os.system('clear')
   print("""+----------------------------+
