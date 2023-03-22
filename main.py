@@ -76,24 +76,15 @@ def card(): # draws card with custom random variables generated
   if mode == "easy": [var1,var2,operation_int] = [random.randint(0,10),random.randint(0,10),random.randint(0,3)]     #
   elif mode == "medium": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,10),random.randint(0,3)]
   elif mode == "hard": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)]   # } card random question generation
-  if operation_int == 0 :                         #
-    if var1 <= 9 or var2 <=9 : operation = " +"
-    if var1 <= 9 and var2 <= 9: operation = " + "
-    if var1 >= 10 and var2 >= 10: operation = "+"
-  elif operation_int == 1 :
-    if var1 <= 9 or var2 <=9 : operation = " -"
-    if var1 <= 9 and var2 <= 9: operation = " - "
-    if var1 >= 10 and var2 >= 10: operation = "-"
-  elif operation_int == 2 :
-    if var1 <= 9 or var2 <=9 : operation = " *"
-    if var1 <= 9 and var2 <= 9: operation = " * "
-    if var1 >= 10 and var2 >= 10: operation = "*"
-  elif operation_int == 3 :
-    if var1 <= 9 or var2 <=9 : operation = " /"
-    if var1 <= 9 and var2 <= 9: operation = " / "
-    if var1 >= 10 and var2 >= 10: operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
-    if var1 == 0: var1 = 1    #
-    elif var2 == 0 : var2 = 1 # ZeroDivisionError prevention
+  if operation_int == 0 : operation = "+"
+  elif operation_int == 1: operation = "-"
+  elif operation_int == 2: operation = "*"
+  elif operation_int == 3: operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
+  if var1 <= 9 and var2 <= 9: operation = " "+operation+" "
+  elif var1 <= 9 or var2 <= 9: operation = " "+operation
+  if operation_int == 3:
+    if var1 == 0: var1 = 1  #
+    if var2 == 0 : var2 = 1 # ZeroDivisionError prevention
 
   os.system('clear')
   print("""+----------------------------+
