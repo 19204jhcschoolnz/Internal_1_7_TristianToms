@@ -80,8 +80,8 @@ def card(): # draws card with custom random variables generated
   elif operation_int == 1: operation = "-"
   elif operation_int == 2: operation = "*"
   elif operation_int == 3: operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
-  if var1 <= 9 and var2 <= 9: operation = " "+operation+" "
-  elif var1 <= 9 or var2 <= 9: operation = " "+operation
+  if var1 <= 9 and var2 <= 9: operation = " "+operation+" " #
+  elif var1 <= 9 or var2 <= 9: operation = " "+operation    # checks and adds correct spacing so the card graphical edges dont break
   if operation_int == 3:
     if var1 == 0: var1 = 1 #
     if var2 == 0: var2 = 1 # ZeroDivisionError prevention
@@ -172,8 +172,8 @@ def endcard(): # end card displays what the users end score was, how many cards 
     print("\u001b[35mSetting up a new game\u001b[0m")
     [points,lives,cardnum,playagain]=[0,5,0,""] # resets variables to starting values so the game can restart correctly
     time.sleep(1)
-    startcard()
-    game()
+    startcard() # allows the user to change thier current gamemode
+    game() # starts a new game if the player wants to start a new game
   elif playagain == "no" or playagain == "n": # displays a "thank you for playing" mesage before exiting the code
     print("\n\u001b[35mThank you for playing\u001b[0m")
     exit
@@ -185,8 +185,8 @@ def endcard(): # end card displays what the users end score was, how many cards 
 
 def game(): # tests if the player has ran out of lives and halts the current game before displaying the end card
   global lives
-  while lives >=1: card()
-  endcard()
+  while lives >=1: card() # iterates the card code untill the player runs out of lives
+  endcard() # runs the end card code
   
 
 # game initiation order
