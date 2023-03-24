@@ -35,7 +35,7 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
 | \u001b[31m          'hard'          \u001b[0m |
 +----------------------------+""")
   mode = input('')
-  if mode == "easy":                                                             #
+  if mode == "easy": #
     print("\u001b[35mGamemode \u001b[32m'easy'\u001b[35m selected\u001b[0m")
     time.sleep(1)
   elif mode == "medium":
@@ -47,7 +47,7 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
   else: 
     print("\u001b[33mInvalid game mode name selected please try again\u001b[0m")
     time.sleep(1)
-    startcard()                                                                  # game mode selection
+    startcard()      # game mode selection
 
 
 def rules(): # rule card that explains what the rules are and how the game works
@@ -76,16 +76,15 @@ def card(): # draws card with custom random variables generated
   if mode == "easy": [var1,var2,operation_int] = [random.randint(0,10),random.randint(0,10),random.randint(0,3)]     #
   elif mode == "medium": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,10),random.randint(0,3)]
   elif mode == "hard": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)]   # } card random question generation
-  if operation_int == 0 : operation = "+"
+  if operation_int == 0 : operation = "+"  #
   elif operation_int == 1: operation = "-"
   elif operation_int == 2: operation = "*"
   elif operation_int == 3: operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
   if var1 <= 9 and var2 <= 9: operation = " "+operation+" "
   elif var1 <= 9 or var2 <= 9: operation = " "+operation
   if operation_int == 3:
-    if var1 == 0: var1 = 1  #
-    if var2 == 0 : var2 = 1 # ZeroDivisionError prevention
-
+    if var1 == 0: var1 = 1 #
+    if var2 == 0: var2 = 1 # ZeroDivisionError prevention
   os.system('clear')
   print("""+----------------------------+
 | \u001b[36mCard #""",cardnum,"""\u001b[0m
@@ -102,22 +101,15 @@ def card(): # draws card with custom random variables generated
 | \u001b[34m            Or            \u001b[0m |
 | \u001b[34m Press ENTER To Skip Card \u001b[0m |
 +----------------------------+""")
- 
-  
-  try:                      #
-    card = float(input(''))
-  except ValueError:
-    card = ""               # } error handling
-  
-  if card == "":
+  try: card = float(input('')) #
+  except ValueError: card = "" # } error handling
+  if card == "":  #
     if operation_int == 0: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 + var2,"\u001b[0m")
     elif operation_int == 1: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 - var2,"\u001b[0m")
     elif operation_int == 2: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 * var2,"\u001b[0m")
     elif operation_int == 3: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
     lives -=1
-    time.sleep(1)
-    # checks if card was skipped or a non interger answer was submitted
-    
+    time.sleep(1) # checks if card was skipped or a non interger answer was submitted
   elif operation_int == 0:
     if card == (var1 + var2):
       print("\u001b[32mCorrect answer, +1 point\u001b[0m")
@@ -127,7 +119,6 @@ def card(): # draws card with custom random variables generated
       print("\u001b[31mIncorrect answer, the correct answer was:",var1 + var2,"\u001b[0m")
       lives -=1
       time.sleep(1)
-    
   elif operation_int == 1:
     if card == (var1 - var2):
       print("\u001b[32mCorrect answer, +1 point\u001b[0m")
@@ -137,7 +128,6 @@ def card(): # draws card with custom random variables generated
       print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 - var2,"\u001b[0m")
       lives -=1
       time.sleep(1)
-    
   elif operation_int == 2:
     if card == (var1 * var2):
       print("\u001b[32mCorrect answer, +1 point\u001b[0m")
@@ -147,7 +137,6 @@ def card(): # draws card with custom random variables generated
       print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 * var2,"\u001b[0m")
       lives -=1
       time.sleep(1)
-    
   elif operation_int == 3:
     if card == round(var1 / var2,2):
       print("\u001b[32mCorrect answer, +1 point\u001b[0m")
@@ -157,7 +146,6 @@ def card(): # draws card with custom random variables generated
       print("\u001b[31mIncorrect answer, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
       lives -=1
       time.sleep(1)
-
   # checking for correct answers for the four variations of operations (add, subtract, multiply and divide) and displays if the player gets the answer wrong and what the correct answer was
 
 
