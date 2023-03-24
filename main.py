@@ -110,43 +110,18 @@ def card(): # draws card with custom random variables generated
     elif operation_int == 3: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
     lives -=1
     time.sleep(1) # checks if card was skipped or a non interger answer was submitted
-  elif operation_int == 0:
-    if card == (var1 + var2):
+  else:             #
+    if operation_int == 0 and card == (var1 + var2) or operation_int == 1 and card == (var1 - var2) or operation_int == 2 and card == (var1 * var2) or operation_int == 3 and card == round(var1 / var2,2):
       print("\u001b[32mCorrect answer, +1 point\u001b[0m")
       points += 1
       time.sleep(2)
     else:
-      print("\u001b[31mIncorrect answer, the correct answer was:",var1 + var2,"\u001b[0m")
+      if operation_int == 0: print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 + var2,"\u001b[0m")
+      elif operation_int == 1: print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 - var2,"\u001b[0m")
+      elif operation_int == 2: print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 * var2,"\u001b[0m") 
+      elif operation_int == 3: print("\u001b[31mIncorrect answer, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
       lives -=1
-      time.sleep(1)
-  elif operation_int == 1:
-    if card == (var1 - var2):
-      print("\u001b[32mCorrect answer, +1 point\u001b[0m")
-      points += 1
-      time.sleep(2)
-    else:
-      print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 - var2,"\u001b[0m")
-      lives -=1
-      time.sleep(1)
-  elif operation_int == 2:
-    if card == (var1 * var2):
-      print("\u001b[32mCorrect answer, +1 point\u001b[0m")
-      points += 1
-      time.sleep(2)
-    else:
-      print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 * var2,"\u001b[0m")
-      lives -=1
-      time.sleep(1)
-  elif operation_int == 3:
-    if card == round(var1 / var2,2):
-      print("\u001b[32mCorrect answer, +1 point\u001b[0m")
-      points += 1
-      time.sleep(2)
-    else:
-      print("\u001b[31mIncorrect answer, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
-      lives -=1
-      time.sleep(1)
-  # checking for correct answers for the four variations of operations (add, subtract, multiply and divide) and displays if the player gets the answer wrong and what the correct answer was
+      time.sleep(1) # checking for correct answers for the four variations of operations (add, subtract, multiply and divide) and displays if the player gets the answer wrong and what the correct answer was
 
 
 def endcard(): # end card displays what the users end score was, how many cards they answered and asks them if they would like to play again
