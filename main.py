@@ -35,13 +35,13 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
 | \u001b[31m          'hard'          \u001b[0m |
 +----------------------------+""")
   mode = input('')
-  if mode == "easy": #
+  if mode.strip().lower() == "easy": #
     print("\u001b[35mGamemode \u001b[32m'easy'\u001b[35m selected\u001b[0m")
     time.sleep(1)
-  elif mode == "medium":
+  elif mode.strip().lower() == "medium":
     print("\u001b[35mGamemode \u001b[33m'medium'\u001b[35m selected\u001b[0m")
     time.sleep(1)
-  elif mode == "hard":
+  elif mode.strip().lower() == "hard":
     print("\u001b[35mGamemode \u001b[31m'hard'\u001b[35m selected\u001b[0m")
     time.sleep(1)
   else: 
@@ -73,9 +73,9 @@ def rules(): # rule card that explains what the rules are and how the game works
 def card(): # draws card with custom random variables generated
   global lives,points,cardnum,mode
   cardnum += 1 # increases card number by one
-  if mode == "easy": [var1,var2,operation_int] = [random.randint(0,10),random.randint(0,10),random.randint(0,3)]     #
-  elif mode == "medium": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,10),random.randint(0,3)]
-  elif mode == "hard": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)]   # } card random question generation
+  if mode.strip().lower() == "easy": [var1,var2,operation_int] = [random.randint(0,10),random.randint(0,10),random.randint(0,3)]     #
+  elif mode.strip().lower() == "medium": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,10),random.randint(0,3)]
+  elif mode.strip().lower() == "hard": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)]   # } card random question generation
   if operation_int == 0 : operation = "+"  #
   elif operation_int == 1: operation = "-"
   elif operation_int == 2: operation = "*"
