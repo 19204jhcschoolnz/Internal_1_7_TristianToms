@@ -47,7 +47,7 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
   else: 
     print("\u001b[33mInvalid game mode name selected please try again\u001b[0m")
     time.sleep(1)
-    startcard()      # game mode selection
+    startcard()                      # game mode selection
 
 
 def rules(): # rule card that explains what the rules are and how the game works
@@ -160,7 +160,7 @@ def endcard(): # end card displays what the users end score was, how many cards 
 
 def game(): # tests if the player has ran out of lives and halts the current game before displaying the end card
   global lives
-  while lives >=1: card() # iterates the card code untill the player runs out of lives
+  while lives >=1: card() # iterates the card code until the player runs out of lives
   endcard() # runs the end card code
   
 
