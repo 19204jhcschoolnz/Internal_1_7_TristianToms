@@ -29,6 +29,7 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
 |                            |
 | \u001b[35m         QUIZ GAME        \u001b[0m |
 |                            |
+|                            |
 | \u001b[34m Please Input A Game Mode \u001b[0m |
 | \u001b[32m          'easy'          \u001b[0m |
 | \u001b[33m         'medium'         \u001b[0m |
@@ -37,16 +38,16 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
   mode = input('')
   if mode.strip().lower() == "easy": #
     print("\u001b[35mGamemode \u001b[32m'easy'\u001b[35m selected\u001b[0m")
-    time.sleep(1)
+    time.sleep(2)
   elif mode.strip().lower() == "medium":
     print("\u001b[35mGamemode \u001b[33m'medium'\u001b[35m selected\u001b[0m")
-    time.sleep(1)
+    time.sleep(2)
   elif mode.strip().lower() == "hard":
     print("\u001b[35mGamemode \u001b[31m'hard'\u001b[35m selected\u001b[0m")
-    time.sleep(1)
+    time.sleep(2)
   else: 
     print("\u001b[33mInvalid game mode name selected please try again\u001b[0m")
-    time.sleep(1)
+    time.sleep(2)
     startcard()                      # game mode selection
 
 
@@ -65,6 +66,7 @@ def rules(): # rule card that explains what the rules are and how the game works
 | \u001b[36mend of the quiz your total\u001b[0m |
 | \u001b[36mamount of points will be  \u001b[0m |
 | \u001b[36mdisplayed for you to see. \u001b[0m |
+|                            |
 | \u001b[34m>Press ENTER To Continue.<\u001b[0m |
 +----------------------------+""")
   input('')
@@ -97,6 +99,7 @@ def card(): # draws card with custom random variables generated
 |                            |
 |                            |
 |                            |
+|                            |
 | \u001b[34m Type an acceptable answer\u001b[0m |
 | \u001b[34m            Or            \u001b[0m |
 | \u001b[34m Press ENTER To Skip Card \u001b[0m |
@@ -109,7 +112,7 @@ def card(): # draws card with custom random variables generated
     elif operation_int == 2: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 * var2,"\u001b[0m")
     elif operation_int == 3: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
     lives -=1
-    time.sleep(1) # checks if card was skipped or a non interger answer was submitted
+    time.sleep(3) # checks if card was skipped or a non interger answer was submitted
   else:             #
     if operation_int == 0 and card == (var1 + var2) or operation_int == 1 and card == (var1 - var2) or operation_int == 2 and card == (var1 * var2) or operation_int == 3 and card == round(var1 / var2,2):
       print("\u001b[32mCorrect answer, +1 point\u001b[0m")
@@ -121,7 +124,7 @@ def card(): # draws card with custom random variables generated
       elif operation_int == 2: print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 * var2,"\u001b[0m") 
       elif operation_int == 3: print("\u001b[31mIncorrect answer, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
       lives -=1
-      time.sleep(1) # checking for correct answers for the four variations of operations (add, subtract, multiply and divide) and displays if the player gets the answer wrong and what the correct answer was
+      time.sleep(2) # checking for correct answers for the four variations of operations (add, subtract, multiply and divide) and displays if the player gets the answer wrong and what the correct answer was
 
 
 def endcard(): # end card displays what the users end score was, how many cards they answered and asks them if they would like to play again
@@ -140,21 +143,22 @@ def endcard(): # end card displays what the users end score was, how many cards 
 |                            |
 | \u001b[34mDo you want to play again \u001b[0m |
 | \u001b[34mand try to beat your high \u001b[0m |
-| \u001b[34mscore? (yes (y) / no (n) )\u001b[0m |
+| \u001b[34m          score?          \u001b[0m |
+| \u001b[34m    (yes (y) / no (n) )   \u001b[0m |
 +----------------------------+""")
   playagain = input('')
-  if playagain == "yes" or playagain == "y": # begins to prepare the code to play another game
+  if playagain.strip().lower() == "yes" or playagain.strip().lower() == "y": # begins to prepare the code to play another game
     print("\u001b[35mSetting up a new game\u001b[0m")
     [points,lives,cardnum,playagain]=[0,5,0,""] # resets variables to starting values so the game can restart correctly
-    time.sleep(1)
+    time.sleep(2)
     startcard() # allows the user to change thier current gamemode
     game() # starts a new game if the player wants to start a new game
-  elif playagain == "no" or playagain == "n": # displays a "thank you for playing" mesage before exiting the code
+  elif playagain.strip().lower() == "no" or playagain.strip().lower() == "n": # displays a "thank you for playing" mesage before exiting the code
     print("\n\u001b[35mThank you for playing\u001b[0m")
     exit
   else: # retries in the case of an unexpected input
     print ("\u001b[33mUnexpected answer, please try again\u001b[0m")
-    time.sleep(1)
+    time.sleep(2)
     endcard()
 
 
