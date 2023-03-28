@@ -98,7 +98,7 @@ def card(): # draws card with custom random variables generated
 | \u001b[34m Press ENTER To Skip Card \u001b[0m |
 +----------------------------+""")
   try: card = float(input('')) #
-  except ValueError: card = "" # } error handling
+  except ValueError: card = "" # error handling
   if card == "":  #
     if operation_int == 0: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 + var2,"\u001b[0m")
     elif operation_int == 1: print("\u001b[33mIncorrect answer or card skipped, the correct answer was:",var1 - var2,"\u001b[0m")
