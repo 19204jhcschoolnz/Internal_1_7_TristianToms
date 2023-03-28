@@ -1,5 +1,5 @@
 '''
-  Name: 
+  Name: Tristian Toms
   James Hargest College
   Programming Internal for 1.7 ~ 4 credits
   Due: 6 April 2023
@@ -36,20 +36,13 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
 | \u001b[31m          'hard'          \u001b[0m |
 +----------------------------+""")
   mode = input('')
-  if mode.strip().lower() == "easy": #
-    print("\u001b[35mGamemode \u001b[32m'easy'\u001b[35m selected\u001b[0m")
-    time.sleep(2)
-  elif mode.strip().lower() == "medium":
-    print("\u001b[35mGamemode \u001b[33m'medium'\u001b[35m selected\u001b[0m")
-    time.sleep(2)
-  elif mode.strip().lower() == "hard":
-    print("\u001b[35mGamemode \u001b[31m'hard'\u001b[35m selected\u001b[0m")
-    time.sleep(2)
+  if mode.strip().lower() == "easy": print("\u001b[35mGamemode \u001b[32m'easy'\u001b[35m selected\u001b[0m") #
+  elif mode.strip().lower() == "medium": print("\u001b[35mGamemode \u001b[33m'medium'\u001b[35m selected\u001b[0m")
+  elif mode.strip().lower() == "hard": print("\u001b[35mGamemode \u001b[31m'hard'\u001b[35m selected\u001b[0m")
   else: 
     print("\u001b[33mInvalid game mode name selected please try again\u001b[0m")
-    time.sleep(2)
-    startcard()                      # game mode selection
-
+    startcard()                                                                                               # game mode selection
+  time.sleep(2)
 
 def rules(): # rule card that explains what the rules are and how the game works
   os.system('clear')
@@ -77,11 +70,11 @@ def card(): # draws card with custom random variables generated
   cardnum += 1 # increases card number by one
   if mode.strip().lower() == "easy": [var1,var2,operation_int] = [random.randint(0,10),random.randint(0,10),random.randint(0,3)]     #
   elif mode.strip().lower() == "medium": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,10),random.randint(0,3)]
-  elif mode.strip().lower() == "hard": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)]   # } card random question generation
+  elif mode.strip().lower() == "hard": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)]   # card random question generation
   if operation_int == 0 : operation = "+"  #
   elif operation_int == 1: operation = "-"
   elif operation_int == 2: operation = "*"
-  elif operation_int == 3: operation = "/" # } operation decyphering for addition, subtraction, multiplication and division
+  elif operation_int == 3: operation = "/" # operation decyphering for addition, subtraction, multiplication and division
   if var1 <= 9 and var2 <= 9: operation = " "+operation+" " #
   elif var1 <= 9 or var2 <= 9: operation = " "+operation    # checks and adds correct spacing so the card graphical edges dont break
   if operation_int == 3:
@@ -114,10 +107,14 @@ def card(): # draws card with custom random variables generated
     lives -=1
     time.sleep(3) # checks if card was skipped or a non interger answer was submitted
   else:             #
-    if operation_int == 0 and card == (var1 + var2) or operation_int == 1 and card == (var1 - var2) or operation_int == 2 and card == (var1 * var2) or operation_int == 3 and card == round(var1 / var2,2):
-      print("\u001b[32mCorrect answer, +1 point\u001b[0m")
-      points += 1
-      time.sleep(2)
+    if operation_int == 0 and card == (var1 + var2) or operation_int == 1 and card == (var1 - var2) or operation_int == 2 and card == (var1 * var2) or operation_int == 3 and card == round(var1 / var2,2): #
+      if mode.strip().lower() == "easy": print("\u001b[32mCorrect answer, +1 point\u001b[0m")
+      elif mode.strip().lower() == "medium": print("\u001b[32mCorrect answer, +3 points\u001b[0m")
+      elif mode.strip().lower() == "hard": print("\u001b[32mCorrect answer, +5 points\u001b[0m")
+      if mode.strip().lower() == "easy": points += 1
+      elif mode.strip().lower() == "medium": points += 2
+      elif mode.strip().lower() == "hard": points += 5
+      time.sleep(2)                                             # awarding points for correct answers
     else:
       if operation_int == 0: print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 + var2,"\u001b[0m")
       elif operation_int == 1: print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 - var2,"\u001b[0m")
@@ -163,7 +160,7 @@ def endcard(): # end card displays what the users end score was, how many cards 
 
 
 def game(): # tests if the player has ran out of lives and halts the current game before displaying the end card
-  global lives
+  global lives # 19204
   while lives >=1: card() # iterates the card code until the player runs out of lives
   endcard() # runs the end card code
   
