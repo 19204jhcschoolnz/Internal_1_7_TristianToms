@@ -12,7 +12,7 @@ import time, os, random # imports required librabries; time for refresh delay, o
 
 # variables
 
-[points,lives,cardnum,playagain,mode]=[0,5,0,"",""] # points = amount of cards answered correctly,lives = amount of times the player can skip an answer or answer incorrectly before the game ends, cardnum = amount of cards answered, playagain = play again placeholder and mode is the game difficulty
+[points,lives,cardnum,playagain,mode] = [0,5,0,"",""] # points = amount of cards answered correctly,lives = amount of times the player can skip an answer or answer incorrectly before the game ends, cardnum = amount of cards answered, playagain = play again placeholder and mode is the game difficulty
 
 # cards
 
@@ -41,6 +41,7 @@ def startcard(): # start / title card to serve as a buffer for when the game sta
   elif mode.strip().lower() == "hard": print("\u001b[35mGamemode \u001b[31m'hard'\u001b[35m selected\u001b[0m")
   else: 
     print("\u001b[33mInvalid game mode name selected please try again\u001b[0m")
+    time.sleep(2)
     startcard()                                                                                               # game mode selection
   time.sleep(2)
 
@@ -71,12 +72,12 @@ def card(): # draws card with custom random variables generated
   if mode.strip().lower() == "easy": [var1,var2,operation_int] = [random.randint(0,10),random.randint(0,10),random.randint(0,3)]     #
   elif mode.strip().lower() == "medium": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,10),random.randint(0,3)]
   elif mode.strip().lower() == "hard": [var1,var2,operation_int] = [random.randint(0,99),random.randint(0,99),random.randint(0,3)]   # card random question generation
-  if operation_int == 0 : operation = "+"  #
+  if operation_int == 0: operation = "+"  #
   elif operation_int == 1: operation = "-"
   elif operation_int == 2: operation = "*"
   elif operation_int == 3: operation = "/" # operation decyphering for addition, subtraction, multiplication and division
-  if var1 <= 9 and var2 <= 9: operation = " "+operation+" " #
-  elif var1 <= 9 or var2 <= 9: operation = " "+operation    # checks and adds correct spacing so the card graphical edges dont break
+  if var1 <= 9 and var2 <= 9: operation = " " + operation + " " #
+  elif var1 <= 9 or var2 <= 9: operation = " " + operation    # checks and adds correct spacing so the card graphical edges dont break
   if operation_int == 3:
     if var1 == 0: var1 = 1 #
     if var2 == 0: var2 = 1 # ZeroDivisionError prevention
@@ -107,7 +108,7 @@ def card(): # draws card with custom random variables generated
     lives -=1
     time.sleep(3) # checks if card was skipped or a non interger answer was submitted
   else:             #
-    if operation_int == 0 and card == (var1 + var2) or operation_int == 1 and card == (var1 - var2) or operation_int == 2 and card == (var1 * var2) or operation_int == 3 and card == round(var1 / var2,2): #
+    if [operation_int,card] == [0,(var1 + var2)] or [operation_int,card] == [1,(var1 - var2)] or [operation_int,card] == [2,(var1 * var2)] or [operation_int,card] == [3,round(var1 / var2,2)]: #
       if mode.strip().lower() == "easy": print("\u001b[32mCorrect answer, +1 point\u001b[0m")
       elif mode.strip().lower() == "medium": print("\u001b[32mCorrect answer, +3 points\u001b[0m")
       elif mode.strip().lower() == "hard": print("\u001b[32mCorrect answer, +5 points\u001b[0m")
@@ -120,7 +121,7 @@ def card(): # draws card with custom random variables generated
       elif operation_int == 1: print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 - var2,"\u001b[0m")
       elif operation_int == 2: print("\u001b[31mIncorrect answer, the correct answer was:","\u001b[0m",var1 * var2,"\u001b[0m") 
       elif operation_int == 3: print("\u001b[31mIncorrect answer, the correct answer was:",round(var1 / var2,2),"\u001b[0m")
-      lives -=1
+      lives -= 1
       time.sleep(2) # checking for correct answers for the four variations of operations (add, subtract, multiply and divide) and displays if the player gets the answer wrong and what the correct answer was
 
 
@@ -146,7 +147,7 @@ def endcard(): # end card displays what the users end score was, how many cards 
   playagain = input('')
   if playagain.strip().lower() == "yes" or playagain.strip().lower() == "y": # begins to prepare the code to play another game
     print("\u001b[35mSetting up a new game\u001b[0m")
-    [points,lives,cardnum,playagain]=[0,5,0,""] # resets variables to starting values so the game can restart correctly
+    [points,lives,cardnum,playagain] = [0,5,0,""] # resets variables to starting values so the game can restart correctly
     time.sleep(2)
     startcard() # allows the user to change thier current gamemode
     game() # starts a new game if the player wants to start a new game
@@ -161,7 +162,7 @@ def endcard(): # end card displays what the users end score was, how many cards 
 
 def game(): # tests if the player has ran out of lives and halts the current game before displaying the end card
   global lives # 19204
-  while lives >=1: card() # iterates the card code until the player runs out of lives
+  while lives >= 1: card() # iterates the card code until the player runs out of lives
   endcard() # runs the end card code
   
 
