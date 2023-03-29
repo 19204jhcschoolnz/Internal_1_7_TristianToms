@@ -11,12 +11,18 @@
 import time
 import os
 import random
-# imports required librabries; time for refresh delay,  os for screen clearing and random for question generation
+# imports required librabries;
+# time for refresh delay
+# os for screen clearing
+# random for question generation
 
 # variables
 
 [points, lives, cardnum, playagain, mode] = [0, 5, 0, "", ""]
-# points = amount of cards answered correctly,  lives = amount of times the player can skip an answer or answer incorrectly before the game ends,  cardnum = amount of cards answered,  playagain = play again placeholder and mode is the game difficulty
+# points = amount of cards answered correctly
+# lives = amount of times the player can skip an answer or answer incorrectly before the game ends
+# cardnum = amount of cards answered
+# playagain = play again placeholder and mode is the game difficulty
 
 # cards
 
@@ -49,7 +55,7 @@ def startcard():
     elif mode.strip().lower() == "hard":
         print("\u001b[35mGamemode \u001b[31m'hard'\u001b[35m selected\u001b[0m")
     else:
-        print("\u001b[33mInvalid game mode name selected please try again\u001b[0m")
+        print("\u001b[33mInvalid game mode selected please try again\u001b[0m")
         startcard()
     time.sleep(2)
     # game mode selection
@@ -107,7 +113,7 @@ def card():
         if var1 == 0:
             var1 = 1
         if var2 == 0:
-            var2 = 1 
+            var2 = 1
     # ZeroDivisionError prevention
     os.system('clear')
     print("""+----------------------------+
@@ -133,18 +139,25 @@ def card():
     # error handling
     if card == "":
         if operation_int == 0:
-            print("\u001b[33mIncorrect answer or card skipped,  the correct answer was:", var1 + var2, "\u001b[0m")
+            print("""\u001b[33mIncorrect answer or card skipped,
+The correct answer was:", var1 + var2, "\u001b[0m""")
         elif operation_int == 1:
-            print("\u001b[33mIncorrect answer or card skipped,  the correct answer was:", var1 - var2, "\u001b[0m")
+            print("""\u001b[33mIncorrect answer or card skipped,
+The correct answer was:", var1 - var2, "\u001b[0m""")
         elif operation_int == 2:
-            print("\u001b[33mIncorrect answer or card skipped,  the correct answer was:", var1 * var2, "\u001b[0m")
+            print("""\u001b[33mIncorrect answer or card skipped,
+The correct answer was:", var1 * var2, "\u001b[0m""")
         elif operation_int == 3:
-            print("\u001b[33mIncorrect answer or card skipped,  the correct answer was:", round(var1 / var2, 2), "\u001b[0m")
+            print("""\u001b[33mIncorrect answer or card skipped,
+The correct answer was:", round(var1 / var2, 2), "\u001b[0m""")
         lives -= 1
         time.sleep(3)
         # checks if card was skipped or a non interger answer was submitted
     else:
-        if operation_int == 0 and card == (var1 + var2) or operation_int == 1 and card == (var1 - var2) or operation_int == 2 and card == (var1 * var2) or operation_int == 3 and card == round(var1 / var2, 2):
+        if ([operation_int, card] == [0, (var1 + var2)] or
+        [operation_int, card] == [1, (var1 - var2)] or
+        [operation_int, card] == [2, (var1 * var2)] or
+        [operation_int, card] == [3, round(var1 / var2,2)]):
             if mode.strip().lower() == "easy":
                 print("\u001b[32mCorrect answer,  +1 point\u001b[0m")
             elif mode.strip().lower() == "medium":
@@ -161,20 +174,26 @@ def card():
             # awarding points for correct answers
         else:
             if operation_int == 0:
-                print("\u001b[31mIncorrect answer,  the correct answer was:", "\u001b[0m", var1 + var2, "\u001b[0m")
+                print("""\u001b[31mIncorrect answer, 
+The correct answer was:""", var1 + var2, """\u001b[0m""")
             elif operation_int == 1:
-                print("\u001b[31mIncorrect answer,  the correct answer was:", "\u001b[0m", var1 - var2, "\u001b[0m")
+                print("""\u001b[31mIncorrect answer,
+The correct answer was:""", var1 - var2, """\u001b[0m""")
             elif operation_int == 2:
-                print("\u001b[31mIncorrect answer,  the correct answer was:", "\u001b[0m", var1 * var2, "\u001b[0m") 
+                print("""\u001b[31mIncorrect answer,
+The correct answer was:""", var1 * var2, """\u001b[0m""")
             elif operation_int == 3:
-                print("\u001b[31mIncorrect answer,  the correct answer was:", round(var1 / var2, 2), "\u001b[0m")
+                print("""\u001b[31mIncorrect answer,
+The correct answer was:""", round(var1 / var2, 2), """\u001b[0m""")
             lives -= 1
             time.sleep(2)
-            # checking for correct answers for the four variations of operations (add,  subtract,  multiply and divide) and displays if the player gets the answer wrong and what the correct answer was
-  
-  
+            # checking for correct answers for the four variations of operations (add,  subtract,  multiply and divide)
+            # and displays if the player gets the answer wrong and what the correct answer was
+
+
 def endcard():
-    """End card displays what the users end score was,  how many cards they answered and asks them if they would like to play again."""
+    """End card displays what the users end score was,
+       how many cards they answered and asks them if they would like to play again."""
     global points,  lives,  cardnum,  playagain
     os.system('clear')
     print("""+----------------------------+
@@ -210,27 +229,28 @@ def endcard():
         exit
     else:
         # retries in the case of an unexpected input
-        print ("\u001b[33mUnexpected answer,  please try again\u001b[0m")
+        print("\u001b[33mUnexpected answer,  please try again\u001b[0m")
         time.sleep(2)
         endcard()
 
 
 def game():
-    """Test if the player has ran out of lives and halts the current game before displaying the end card."""
+    """Test if the player has ran out of lives,
+       and halts the current game before displaying the end card."""
     global lives
     while lives >= 1:
         card()
     # iterates the card code until the player runs out of lives
     endcard()
     # runs the end card code
-  
+
 
 # game initiation order
 
 
-"""startcard()"""
+startcard()
 # displays starting title card
-"""rules()"""
+rules()
 # displays rules card
-"""game()"""
+game()
 # initiates functional game code
