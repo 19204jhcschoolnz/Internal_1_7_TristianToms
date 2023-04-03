@@ -19,6 +19,7 @@ import random
 # variables
 
 [points, lives, cardnum, playagain, mode] = [0, 5, 0, "", ""]
+answer = False
 # points = amount of cards answered correctly
 # lives = amount of times the player can skip an answer
 #         or answer incorrectly before the game ends
@@ -30,7 +31,7 @@ import random
 
 def startcard():
     """Start / title card to serve as a buffer for when the game starts."""
-    global mode
+    global mode, answer
     os.system('clear')
     print("""+----------------------------+
 |                            |
@@ -51,14 +52,17 @@ def startcard():
     mode = input('')
     if mode.strip().lower() == "easy":
         print("\u001b[32mGamemode 'easy' selected\u001b[0m")
+        time.sleep(2)
     elif mode.strip().lower() == "medium":
         print("\u001b[33mGamemode 'medium' selected\u001b[0m")
+        time.sleep(2)
     elif mode.strip().lower() == "hard":
         print("\u001b[31mGamemode 'hard' selected\u001b[0m")
+        time.sleep(2)
     else:
         print("\u001b[33mInvalid game mode selected please try again\u001b[0m")
+        time.sleep(2)
         startcard()
-    time.sleep(2)
     # game mode selection
 
 
@@ -92,7 +96,7 @@ def card():
     if mode.strip().lower() == "easy":
         [var1, var2] = [random.randint(0, 10), random.randint(0, 10)]
     elif mode.strip().lower() == "medium":
-        [var1, var2] = [random.randint(0, 10), random.randint(0, 99)]
+        [var1, var2] = [random.randint(0, 99), random.randint(0, 10)]
     elif mode.strip().lower() == "hard":
         [var1, var2] = [random.randint(0, 99), random.randint(0, 99)]
     operation_int = random.randint(0, 3)
@@ -159,8 +163,12 @@ The correct answer was:""", round(var1 / var2, 2), """\u001b[0m""")
     else:
         if ([operation_int, card] == [0, (var1 + var2)] or
             [operation_int, card] == [1, (var1 - var2)] or
-            [operation_int, card] == [2, (var1 * var2)] or
-                [operation_int, card] == [3, round(var1 / var2, 2)]):
+                [operation_int, card] == [2, (var1 * var2)]):
+            answer = True
+        if operation_int == 3:
+                if card == round(var1 / var2, 2):
+                    answer == True
+        if answer == True:
             if mode.strip().lower() == "easy":
                 print("\u001b[32mCorrect answer,  +1 point\u001b[0m")
             elif mode.strip().lower() == "medium":
@@ -194,7 +202,7 @@ The correct answer was:""", round(var1 / var2, 2), """\u001b[0m""")
             # of operations (add,  subtract,  multiply and divide)
             # and displays if the player gets the answer wrong
             # and what the correct answer was
-
+    
 
 def endcard():
     """End Card.
